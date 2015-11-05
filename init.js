@@ -1,3 +1,11 @@
+/*!
+ * Copyright (c) 2015 Ariel Flesler - aflesler ○ gmail • com
+ * Licensed under MIT
+ * https://github.com/flesler/idonethis-form
+ * @projectDescription Very simple mobile-friendly HTML form to submit a done to IDoneThis
+ * @author Ariel Flesler
+ * @version 1.0.1
+ */
 (function() {
 
 	var qs = {};
@@ -18,18 +26,19 @@
 	var ok = $('.alert-success');
 	// Some fields are missing, cannot allow edition
 	if (!qs.token || !qs.team) {
-		$('form *').attr('disabled', 'disabled');
-		return;
+		return disabled(true);
 	}
 	
-	$('.alert-success a').attr('href', 'https://idonethis.com/cal/'+qs.team+'/');
-
+	var input = $('input');
 	$('form').on('submit', function(e) {
 		e.preventDefault();
 		
-		var done = $.trim($('input').val());
+		var done = $.trim(input.val());
 		if (done)  {
+			disabled(true);
 			submit(this, done);
+		} else {
+			input.focus();
 		}
 	});
 
@@ -51,15 +60,17 @@
 				try {
 					var data = JSON.parse(xhr.responseText);
 					if (data.ok) {
-						$('.alert-success').stop(true).fadeIn('slow')
+						ok.stop(true).fadeIn('slow')
 							.find('a').attr('href', data.result.permalink);
 						form.reset();
 					} else {
 						showError(data.detail);
 					}				
 				} catch (err) {
-					return showError(err.message);
+					showError(err.message);
 				}
+				disabled(false);
+				input.focus();
 			}
 		});
 	}
@@ -72,6 +83,10 @@
 			.fadeOut('slow', function() {
 				$(this).remove();
 			});
+	}
+
+	function disabled(state) {
+		$('form *').attr('disabled', state);
 	}
 
 })();
