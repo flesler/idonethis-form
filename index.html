@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<title>IDoneThis - Quick add form</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="keywords" content="idonethis, done, form, responsive, mobile, ios, android" />
+		<meta name="description" content="Very simple mobile-friendly HTML form to submit a done to IDoneThis" />
+		<meta name="copyright" content="Ariel Flesler" />
+		<meta name="author" content="Ariel Flesler" />
+		<meta name="language" content="en" />
+		<meta name="robots" content="index" />
+
+		<link rel="icon" href="https://dot29u55fapha.cloudfront.net/static/favicon.png" type="image/png" sizes="152x152">
+    <link rel="shortcut icon" href="https://dot29u55fapha.cloudfront.net/static/favicon.ico">
+    <link rel="apple-touch-icon" href="https://dot29u55fapha.cloudfront.net/static/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://dot29u55fapha.cloudfront.net/static/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://dot29u55fapha.cloudfront.net/static/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://dot29u55fapha.cloudfront.net/static/touch-icon-ipad-retina.png">
+    <meta name="apple-mobile-web-app-title" content="iDoneThis - Quick add form">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+		<style type="text/css">
+			/* Too little code, keep it inline */
+			body { padding: 10px 20px; }
+			#alerts { min-height: 72px; overflow: hidden; }
+			.alert { display: none; }
+			button { margin-top: 10px; }
+		</style>
+	</head>
+	<body>
+		<div id="alerts">
+			<div id="token-err" class="alert alert-danger">You must provide a <a href="https://idonethis.com/api/token/" target="_blank" class="alert-link">token</a> within the querystring</div>
+			<div id="team-err" class="alert alert-danger">You must provide a <code>team</code> name within the querystring</div>
+			<div class="alert alert-success">You added a new done! you can add more or <a class="alert-link" target="_blank">view your done</a>.</div>
+		</div>
+
+		<form method="post" action="https://idonethis.com/api/v0.1/dones/" class="form-horizontal">
+			<input type="text" class="form-control" placeholder="What'd you get done today?" autofocus="autofocus" />
+			<button class="btn btn-primary pull-right">Post</button>
+		</form>
+		<script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="init.js"></script>
+	</body>
+</html>
