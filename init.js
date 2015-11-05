@@ -4,7 +4,7 @@
  * https://github.com/flesler/idonethis-form
  * @projectDescription Very simple mobile-friendly HTML form to submit a done to IDoneThis
  * @author Ariel Flesler
- * @version 1.0.1
+ * @version 1.1.0
  */
 (function() {
 
@@ -46,16 +46,21 @@
 		$('.alert-danger').remove();
 		ok.stop(true).fadeOut();
 
+		var data = { raw_text: done, team: qs.team };
+		if (qs.day_start) {
+			// Done's submitted before `day_start` are added to the previous day
+			var start = parseInt(qs.day_start, 10);
+			var date = new Date(Date.now() - start * 3600000);
+			data.done_date = [date.getFullYear(), date.getMonth()+1, date.getDate()].map(pad).join('-');
+		}
+
 		$.ajax({
 			type: form.method,
 			url: form.action,
 			headers: {
 				Authorization: 'Token '+qs.token
 			},
-			data: {
-				raw_text: done,
-				team: qs.team
-			},
+			data: data,
 			complete: function(xhr) {
 				try {
 					var data = JSON.parse(xhr.responseText);
@@ -73,6 +78,10 @@
 				input.focus();
 			}
 		});
+	}
+
+	function pad(n) {
+		return n <= 9 ? '0'+n : n;
 	}
 
 	function showError(msg) {
