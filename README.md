@@ -23,11 +23,13 @@ To [authenticate you](https://idonethis.com/api/v0.1/#authentication), you must 
 
 ### day_start (optional)
 
-I don't know about you, but I always continue doing stuff after midnight and, as I see it, they belong to the "previous" day. In other words, new days begin when I wake up. That's why I added an optional querystring parameter called `day_start` that allows you to specify an hour (1-23). All dones logged before that hour will end up in the previous day.
+I don't know about you, but I always continue doing stuff after midnight and, as I see it, they belong to the "previous" day.
+
+In other words, days begin when I wake up. That's why I added implemented this parameter that allows you to specify an hour (1-23). All dones logged before that hour will end up in the previous day.
 
 ### Example
 
-This is an example of an URL with all 3 parameters:
+This is an example of a URL with all 3 parameters:
 ```
 http://flesler.github.io/idonethis-form/?team=my_team&token=9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b&day_start=8
 ```
@@ -36,6 +38,10 @@ http://flesler.github.io/idonethis-form/?team=my_team&token=9944b09199c62bcf9418
 
 Check [this link](http://teachmeios.com/how-to-add-a-webpage-bookmark-as-an-icon-on-home-screen-of-iphone-ipad-mini-and-ipod-touch/) out to see how to achieve that in iOS.
 Can also be done on other OS, you'll have to google it.
+
+Here's how it looks on my phone:
+
+![](https://raw.githubusercontent.com/flesler/idonethis-form/gh-pages/home-screen.jpg)
 
 ## Why I made this
 
