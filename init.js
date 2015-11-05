@@ -23,7 +23,6 @@
 	if (!qs.token) $('#token-err').show();
 	if (!qs.team) $('#team-err').show();
 
-	var ok = $('.alert-success');
 	// Some fields are missing, cannot allow edition
 	if (!qs.token || !qs.team) {
 		return disabled(true);
@@ -32,8 +31,8 @@
 	// Done's submitted before `day_start` are added to the previous day
 	var dayStart = parseInt(qs.day_start, 10);
 	if (dayStart) {
-		$('#day-info').text(
-			$('#day-info').text().replace('{HOUR}', pad(dayStart))
+		$('#day-info').html(
+			$('#day-info').html().replace('{HOUR}', pad(dayStart))
 		).show();
 	} else {
 		$('#suggest-info').show();
@@ -53,11 +52,12 @@
 	});
 
 	function submit(form, done) {
-		$('.alert-danger,.alert-info').remove();
-		ok.stop(true).fadeOut();
+		$('.alert').stop(true).hide();
+		$('#done-pending').fadeIn();
 
 		var data = { raw_text: done, team: qs.team };
 		if (dayStart) {
+			// Send a done_date instead of relying on IDoneThis' default
 			var date = new Date(Date.now() - dayStart * 3600000);
 			data.done_date = [date.getFullYear(), date.getMonth()+1, date.getDate()].map(pad).join('-');
 		}
@@ -67,18 +67,19 @@
 			url: form.action,
 			headers: { Authorization: 'Token '+qs.token },
 			data: data,
-			complete: function(xhr) {
+			complete: function(xhr, textStatus) {
 				try {
 					var data = JSON.parse(xhr.responseText);
 					if (data.ok) {
-						ok.stop(true).fadeIn('slow').find('a').attr('href', data.result.permalink);
+						$('#done-ok').fadeIn('slow').find('a').attr('href', data.result.permalink);
 						form.reset();
 					} else {
 						showError(data.detail);
 					}				
 				} catch (err) {
-					showError(err.message);
+					showError(textStatus);
 				}
+				$('#done-pending').hide();
 				disabled(false);
 				input.focus();
 			}
@@ -90,13 +91,7 @@
 	}
 
 	function showError(msg) {
-		$('<div>')
-			.addClass('alert alert-danger').text(msg)
-			.appendTo('#alerts').fadeIn('slow')
-			.animate({a:1}, 5000)
-			.fadeOut('slow', function() {
-				$(this).remove();
-			});
+		$('#generic-err').hide().fadeIn('slow').find('.msg').text(msg);
 	}
 
 	function disabled(state) {
