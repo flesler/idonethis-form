@@ -26,11 +26,12 @@
 		<!-- Styles -->
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 		<style type="text/css">
-			/* Too little code, keep it inline */
+			/* Too little code for its own file */
 			body { padding: 10px 20px; }
 			#alerts { min-height: 72px; overflow: hidden; }
 			.alert { display: none; }
-			button { margin-top: 10px; }
+			input { margin-bottom: 10px; }
+			button { margin-left:10px;}
 		</style>
 	</head>
 	<body>
@@ -43,6 +44,9 @@
 		<form method="post" action="https://idonethis.com/api/v0.1/dones/" class="form-horizontal">
 			<input type="text" class="form-control" placeholder="What'd you get done today?" autofocus="autofocus" />
 			<button class="btn btn-primary pull-right">Post</button>
+			<a href="https://github.com/flesler/idonethis-form/" target="_blank" class="pull-right">
+				<img src="https://github.com/fluidicon.png" alt="Github" height="34" />
+			</a>
 		</form>
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript" src="init.js"></script>

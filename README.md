@@ -9,22 +9,40 @@ Very simple mobile-friendly HTML form to submit a done to IDoneThis
 Can be used at http://flesler.github.io/idonethis-form/
 
 It posts your dones using [IDoneThis API](https://idonethis.com/api/v0.1/dones/#post).
-The form is responsive and is especially suited to be used from a mobile phone.
+The form is responsive and especially suited to be used from a mobile phone.
 
-## Authentication
+## Querystring parameters
 
-For it to work, as specified on the [API's docs](https://idonethis.com/api/v0.1/#authentication), you need to provide your team name and [API token](https://idonethis.com/api/token/).
-Add them to the querystring, here's an example:
+### team
 
+You must specify the team to which the done should belong to.
+
+### token
+
+To [authenticate you](https://idonethis.com/api/v0.1/#authentication), you must provide your [API token](https://idonethis.com/api/token/).
+
+### day_start (optional)
+
+I don't know about you, but I always continue doing stuff after midnight and, as I see it, they belong to the "previous" day. In other words, new days begin when I wake up. That's why I added an optional querystring parameter called `day_start` that allows you to specify an hour (1-23). All dones logged before that hour will end up in the previous day.
+
+### Example
+
+This is an example of an URL with all 3 parameters:
 ```
-http://flesler.github.io/idonethis-form/?team=my_team&token=9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
+http://flesler.github.io/idonethis-form/?team=my_team&token=9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b&day_start=8
 ```
+
+## Adding a shortcut on Home Screen
+
+Check [this link](http://teachmeios.com/how-to-add-a-webpage-bookmark-as-an-icon-on-home-screen-of-iphone-ipad-mini-and-ipod-touch/) out to see how to achieve that in iOS.
+Can also be done on other OS, you'll have to google it.
 
 ## Why I made this
 
 When I'm on my PC, I use [idid](https://github.com/jviotti/idid) to quicky add dones from the command-line.
 Sometimes I'm away from my computer and would love to add dones with my phone, there's an [iOS app](https://itunes.apple.com/us/app/idonethis-personal-team-done/id953098586?mt=8) but I don't like it (and seems others don't either).
 Instead, I keep a quick link to this form with my credentials included for fast submissions.
+Also for me, deferring the start of the day is a sweet useful feature.
 
 ## Data privacy
 
