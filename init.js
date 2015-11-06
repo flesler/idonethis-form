@@ -65,7 +65,10 @@
 
 	// Auto (re)focus the input if the user starts typing
 	$('body').keydown(function(e) {
-		input.focus();
+		// Don't break TAB navigation
+		if (e.keyCode !== 9) {
+			input.focus();
+		}
 	});
 
 	function submit(form, done) {
