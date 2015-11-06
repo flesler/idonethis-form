@@ -15,16 +15,16 @@
 	});
 
 	// Redirect to empty params so they can see what is expected of them
-	if (!('token' in qs) || !('team' in qs)) {
-		location.search = 'team=&token=&day_start=0';
+	if (!('token' in qs)) {
+		location.search = 'teams=&token=&day_start=0';
 		return;
 	}
 
 	if (!qs.token) $('#token-err').show();
-	if (!qs.team) $('#team-err').show();
+	if (!qs.teams) $('#team-err').show();
 
 	// Some fields are missing, cannot allow edition
-	if (!qs.token || !qs.team) {
+	if (!qs.token || !qs.teams) {
 		return disabled(true);
 	}
 
@@ -38,7 +38,7 @@
 		$('#suggest-info').show();
 	}
 
-	var teams = qs.team.split(',');
+	var teams = qs.teams.split(',');
 	if (teams.length > 1) {
 		teams.forEach(function(team, i) {
 			var radio = $('<input>').attr({type:'radio', name:'team', value:team});

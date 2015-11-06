@@ -13,11 +13,11 @@ The form is responsive and especially suited to be used from a mobile phone.
 
 ## Querystring parameters
 
-### team
+### teams
 
 You must specify the team to which the done should belong to.
 
-You can specify more than one team, separated by comma. You will get a list radio buttons to pick the team to which each done belongs.
+You can specify more than one team separated by comma. In that case you'll get a list to pick the team to which each done belongs.
 
 ### token
 
@@ -33,7 +33,7 @@ In other words, days begin when I wake up. That's why I added implemented this p
 
 This is an example of a URL with all 3 parameters:
 ```
-http://flesler.github.io/idonethis-form/?team=my_team&token=9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b&day_start=8
+http://flesler.github.io/idonethis-form/?teams=team1,team2&token=9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b&day_start=8
 ```
 
 ## Adding a shortcut on Home Screen
