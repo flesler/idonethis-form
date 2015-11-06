@@ -1,3 +1,6 @@
+# 1.2.0
+- `team` parameter can include many teams separated by comma, which results in radio buttons to pick team
+
 # 1.1.2
 - Auto (re)focus the input if the user starts typing
 

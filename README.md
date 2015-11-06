@@ -17,6 +17,8 @@ The form is responsive and especially suited to be used from a mobile phone.
 
 You must specify the team to which the done should belong to.
 
+You can specify more than one team, separated by comma. You will get a list radio buttons to pick the team to which each done belongs.
+
 ### token
 
 To [authenticate you](https://idonethis.com/api/v0.1/#authentication), you must provide your [API token](https://idonethis.com/api/token/).

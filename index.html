@@ -33,6 +33,7 @@
 			input { margin-bottom: 10px; }
 			button { margin-left:10px;}
 			.glyphicon { margin-right: 5px; }
+			label { margin-right: 10px; }
 		</style>
 	</head>
 	<body>
@@ -47,7 +48,8 @@
 		</div>
 
 		<form method="post" action="https://idonethis.com/api/v0.1/dones/" class="form-horizontal">
-			<input type="text" class="form-control" placeholder="What'd you get done today?" autofocus="autofocus" />
+			<input id="done" type="text" class="form-control" placeholder="What'd you get done today?" autofocus="autofocus" />
+			<div id="teams" class="input-group pull-left"></div>
 			<button class="btn btn-primary pull-right">Post</button>
 			<a href="https://github.com/flesler/idonethis-form/" target="_blank" class="pull-right">
 				<img src="https://github.com/fluidicon.png" alt="Github" height="34" />

@@ -4,7 +4,7 @@
  * https://github.com/flesler/idonethis-form/
  * @projectDescription Very simple mobile-friendly HTML form to submit a done to IDoneThis
  * @author Ariel Flesler
- * @version 1.1.2
+ * @version 1.2.0
  */
 (function() {
 
@@ -37,8 +37,21 @@
 	} else {
 		$('#suggest-info').show();
 	}
+
+	var teams = qs.team.split(',');
+	if (teams.length > 1) {
+		teams.forEach(function(team, i) {
+			var radio = $('<input type="radio">').attr({name:'team', value:team});
+			if (!i) radio.attr('checked', true);
+
+			$('<label>')
+				.text(' '+team)
+				.prepend(radio)
+				.appendTo('#teams');
+		});
+	}
 	
-	var input = $('input');
+	var input = $('#done');
 	$('form').on('submit', function(e) {
 		e.preventDefault();
 		
@@ -60,7 +73,7 @@
 		$('.alert').stop(true).hide();
 		$('#done-pending').fadeIn();
 
-		var data = { raw_text: done, team: qs.team };
+		var data = { raw_text: done, team: getTeam() };
 		if (dayStart) {
 			// Send a done_date instead of relying on IDoneThis' default
 			var date = new Date(Date.now() - dayStart * 3600000);
@@ -89,6 +102,11 @@
 				input.focus();
 			}
 		});
+	}
+
+	function getTeam() {
+		if (teams.length === 1) return teams[0];
+		return $('#teams :checked').val();
 	}
 
 	function pad(n) {
