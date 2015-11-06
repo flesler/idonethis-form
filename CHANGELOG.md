@@ -1,3 +1,6 @@
+# 1.1.2
+- Auto (re)focus the input if the user starts typing
+
 # 1.1.1
 - Added notices related to `day_start` parameter
 

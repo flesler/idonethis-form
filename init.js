@@ -4,7 +4,7 @@
  * https://github.com/flesler/idonethis-form/
  * @projectDescription Very simple mobile-friendly HTML form to submit a done to IDoneThis
  * @author Ariel Flesler
- * @version 1.1.1
+ * @version 1.1.2
  */
 (function() {
 
@@ -44,14 +44,19 @@
 		
 		var done = $.trim(input.val());
 		if (done)  {
-			disabled(true);
 			submit(this, done);
 		} else {
 			input.focus();
 		}
 	});
 
+	// Auto (re)focus the input if the user starts typing
+	$('body').keydown(function(e) {
+		input.focus();
+	});
+
 	function submit(form, done) {
+		disabled(true);
 		$('.alert').stop(true).hide();
 		$('#done-pending').fadeIn();
 
