@@ -65,10 +65,15 @@
 
 	// Auto (re)focus the input if the user starts typing
 	$('body').keydown(function(e) {
-		// Don't break TAB navigation
-		if (e.keyCode !== 9) {
-			input.focus();
+		// TAB switches between teams
+		var l = teams.length;
+		if (e.keyCode === 9 && l > 1) {
+			e.preventDefault();
+			var dir = e.shiftKey ? -1 : 1;
+			var next = teams.indexOf(getTeam()) + dir;
+			$('#teams input').eq((next+l) % l).click();
 		}
+		input.focus();
 	});
 
 	function submit(form, done) {
