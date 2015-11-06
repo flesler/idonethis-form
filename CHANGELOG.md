@@ -4,6 +4,7 @@
 - The TAB key can be used to toggle between teams
 - The text of teams radio buttons are links to their dones page
 - Stopped using form.reset() because radio buttons reset as well
+- Turned off native autocomplete on done input
 
 # 1.1.2
 - Auto (re)focus the input if the user starts typing
