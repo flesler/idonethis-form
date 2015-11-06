@@ -102,7 +102,7 @@
 					var data = JSON.parse(xhr.responseText);
 					if (data.ok) {
 						$('#done-ok').fadeIn('slow').find('a').attr('href', data.result.permalink);
-						form.reset();
+						input.val('');
 					} else {
 						showError(data.detail);
 					}				
