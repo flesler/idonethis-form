@@ -41,12 +41,16 @@
 	var teams = qs.team.split(',');
 	if (teams.length > 1) {
 		teams.forEach(function(team, i) {
-			var radio = $('<input type="radio">').attr({name:'team', value:team});
+			var radio = $('<input>').attr({type:'radio', name:'team', value:team});
 			if (!i) radio.attr('checked', true);
+			var link = $('<a>').text(' '+team).attr({
+				target:'_blank',
+				href:'https://idonethis.com/cal/'+team+'/'
+			});
 
 			$('<label>')
-				.text(' '+team)
-				.prepend(radio)
+				.append(radio)
+				.append(link)
 				.appendTo('#teams');
 		});
 	}

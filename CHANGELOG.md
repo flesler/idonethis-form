@@ -1,6 +1,7 @@
 # 1.2.0
 - `team` parameter can include many teams separated by comma, which results in radio buttons to pick team
 - The TAB key can be used to toggle between teams
+- The text of teams radio buttons are links to their dones page
 
 # 1.1.2
 - Auto (re)focus the input if the user starts typing
