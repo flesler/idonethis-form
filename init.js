@@ -29,7 +29,7 @@
 	}
 
 	// Done's submitted before `day_start` are added to the previous day
-	var dayStart = parseInt(qs.day_start, 10);
+	var dayStart = parseInt(qs.day_start, 10) || 0;
 	if (dayStart) {
 		$('#day-info').html(
 			$('#day-info').html().replace('{HOUR}', pad(dayStart))
@@ -43,7 +43,7 @@
 		teams.forEach(function(team, i) {
 			var radio = $('<input>').attr({type:'radio', name:'team', value:team});
 			if (!i) radio.attr('checked', true);
-			var link = $('<a>').text(' '+team).attr({
+			var link = $('<a>').text(' '+team).on('mousedown', addToday).attr({
 				target:'_blank',
 				href:'https://idonethis.com/cal/'+team+'/'
 			});
@@ -86,11 +86,8 @@
 		$('#done-pending').fadeIn();
 
 		var data = { raw_text: done, team: getTeam() };
-		if (dayStart) {
-			// Send a done_date instead of relying on IDoneThis' default
-			var date = new Date(Date.now() - dayStart * 3600000);
-			data.done_date = [date.getFullYear(), date.getMonth()+1, date.getDate()].map(pad).join('-');
-		}
+		// Send a done_date instead of relying on IDoneThis' default
+		if (dayStart) data.done_date = getToday();
 
 		$.ajax({
 			type: form.method,
@@ -131,6 +128,17 @@
 
 	function disabled(state) {
 		$('form *').attr('disabled', state);
+	}
+
+	function getToday() {
+		var date = new Date(Date.now() - dayStart * 3600000);
+		return [date.getFullYear(), date.getMonth()+1, date.getDate()].map(pad).join('-');
+	}
+
+	function addToday(e) {
+		var link = e.currentTarget;
+		// Before the click, add today's date taking day_start into account
+		link.href = link.href.replace(/#.*|$/, '#date/'+getToday());
 	}
 
 })();

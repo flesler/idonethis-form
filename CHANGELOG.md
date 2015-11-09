@@ -2,9 +2,10 @@
 - `team` parameter was renamed to `teams`
 - `teams` parameter can include many teams separated by comma, which results in radio buttons to pick team
 - The TAB key can be used to toggle between teams
-- The text of teams radio buttons are links to their dones page
 - Stopped using form.reset() because radio buttons reset as well
 - Turned off native autocomplete on done input
+- The text of teams radio buttons are links to their dones page
+- The teams links include today's date having `day_start` into account
 
 # 1.1.2
 - Auto (re)focus the input if the user starts typing
