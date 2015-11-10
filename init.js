@@ -39,21 +39,23 @@
 	}
 
 	var teams = qs.teams.split(',');
-	if (teams.length > 1) {
-		teams.forEach(function(team, i) {
-			var radio = $('<input>').attr({type:'radio', name:'team', value:team});
-			if (!i) radio.attr('checked', true);
-			var link = $('<a>').text(' '+team).on('mousedown', addToday).attr({
-				target:'_blank',
-				href:'https://idonethis.com/cal/'+team+'/'
-			});
+	teams.forEach(function(team, i) {
+		var radio = $('<input>').attr({type:'radio', name:'team', value:team});
+		// Auto select first
+		if (!i) radio.attr('checked', true);
+		// It's redundant to show a single radio button
+		if (teams.length === 1) radio.hide();
 
-			$('<label>')
-				.append(radio)
-				.append(link)
-				.appendTo('#teams');
+		var link = $('<a>').text(' '+team).on('mousedown', addToday).attr({
+			target:'_blank',
+			href:'https://idonethis.com/cal/'+team+'/'
 		});
-	}
+
+		$('<label>')
+			.append(radio)
+			.append(link)
+			.appendTo('#teams');
+	});
 	
 	var input = $('#done');
 	$('form').on('submit', function(e) {
@@ -114,7 +116,6 @@
 	}
 
 	function getTeam() {
-		if (teams.length === 1) return teams[0];
 		return $('#teams :checked').val();
 	}
 
