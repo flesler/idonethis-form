@@ -45,12 +45,16 @@ Here's how it looks on my phone:
 
 ![](https://raw.githubusercontent.com/flesler/idonethis-form/gh-pages/home-screen.jpg)
 
+## Undoing
+
+Once a done is submitted, you will be able to undo what you just did. That will delete the done and restore the done's text on the field for re-submission.
+
 ## Why I made this
 
 When I'm on my PC, I use [idid](https://github.com/jviotti/idid) to quicky add dones from the command-line.
 Sometimes I'm away from my computer and would love to add dones with my phone, there's an [iOS app](https://itunes.apple.com/us/app/idonethis-personal-team-done/id953098586?mt=8) but I don't like it (and seems others don't either).
 Instead, I keep a quick link to this form with my credentials included for fast submissions.
-Also for me, deferring the start of the day is a sweet useful feature.
+Also for me, deferring the start of the day and undoing are sweet useful features.
 
 ## Data privacy
 

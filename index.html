@@ -34,6 +34,7 @@
 			button { margin-left:10px;}
 			.glyphicon { margin-right: 5px; }
 			label { margin-right: 10px; }
+			#undo { color:darkred; }
 		</style>
 	</head>
 	<body>
@@ -43,8 +44,9 @@
 			<div id="generic-err" class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span><span class="msg"></span></div>
 			<div id="day-info" class="alert alert-info"><span class="glyphicon glyphicon-info-sign"></span>Dones submitted before {HOUR}:00 will be added to the previous day</div>
 			<div id="suggest-info" class="alert alert-info"><span class="glyphicon glyphicon-info-sign"></span>Specify a <code>day_start</code> and dones submitted before that hour will be added to the previous day</div>
-			<div id="done-pending" class="alert alert-info"><span class="glyphicon glyphicon-time"></span>Adding a new done...</div>
-			<div id="done-ok" class="alert alert-success"><span class="glyphicon glyphicon-check"></span>You added a new done! you can add more or <a class="alert-link" target="_blank">view your done</a>.</div>
+			<div id="working-info" class="alert alert-info"><span class="glyphicon glyphicon-time"></span>Contacting IDoneThis API...</div>
+			<div id="done-ok" class="alert alert-success"><span class="glyphicon glyphicon-check"></span>You added a new done! you can add more, <a class="alert-link" target="_blank">view your done</a> or <a id="undo" class="alert-link" href="#">undo</a>.</div>
+			<div id="undo-warn" class="alert alert-warning"><span class="glyphicon glyphicon-info-sign"></span>You have undone your last submission</div>
 		</div>
 
 		<form method="post" action="https://idonethis.com/api/v0.1/dones/" class="form-horizontal">

@@ -1,3 +1,6 @@
+# 1.3.0
+- Implemented undo after submission
+
 # 1.2.0
 - `team` parameter was renamed to `teams`
 - `teams` parameter can include many teams separated by comma, which results in radio buttons to pick team

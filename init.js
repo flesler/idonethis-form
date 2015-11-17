@@ -4,7 +4,7 @@
  * https://github.com/flesler/idonethis-form/
  * @projectDescription Very simple mobile-friendly HTML form to submit a done to IDoneThis
  * @author Ariel Flesler
- * @version 1.2.0
+ * @version 1.3.0
  */
 (function() {
 
@@ -82,37 +82,56 @@
 		input.focus();
 	});
 
-	function submit(form, done) {
-		disabled(true);
-		$('.alert').stop(true).hide();
-		$('#done-pending').fadeIn();
+	var lastDone;
+	$('#undo').click(function(e) {
+		e.preventDefault();
+		$('#done-ok').fadeOut('slow');
+		input.val(lastDone.raw_text);
+		ajax('delete', lastDone.url, null, function(json) {
+			$('#undo-warn').fadeIn('slow');
+		});
+	});
 
+	//- Utils
+
+	function submit(form, done) {
 		var data = { raw_text: done, team: getTeam() };
 		// Send a done_date instead of relying on IDoneThis' default
 		if (dayStart) data.done_date = getToday();
 
+		ajax(form.method, form.action, data, function(json) {
+			var data = JSON.parse(json);
+			if (data.ok) {
+				lastDone = data.result;
+				$('#done-ok').fadeIn('slow').find('a').attr('href', data.result.permalink);
+				input.val('');
+			} else {
+				showError(data.detail);
+			}
+		});
+	}
+
+	function ajax(method, action, data, cb) {
+		disabled(true);
+		$('.alert').stop(true).hide();
+		$('#working-info').fadeIn();
+
 		$.ajax({
-			type: form.method,
-			url: form.action,
+			type: method,
+			url: action,
 			headers: { Authorization: 'Token '+qs.token },
 			data: data,
 			complete: function(xhr, textStatus) {
 				try {
-					var data = JSON.parse(xhr.responseText);
-					if (data.ok) {
-						$('#done-ok').fadeIn('slow').find('a').attr('href', data.result.permalink);
-						input.val('');
-					} else {
-						showError(data.detail);
-					}				
+					cb(xhr.responseText);
 				} catch (err) {
-					showError(textStatus);
+					showError(err.message);
 				}
-				$('#done-pending').hide();
+				$('#working-info').hide();
 				disabled(false);
 				input.focus();
 			}
-		});
+		});	
 	}
 
 	function getTeam() {
