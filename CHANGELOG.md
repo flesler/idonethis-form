@@ -1,5 +1,6 @@
 # 1.3.0
 - Implemented undo after submission
+- Clear cached form state from previous sessions on page load
 
 # 1.2.0
 - `team` parameter was renamed to `teams`

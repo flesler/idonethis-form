@@ -58,16 +58,19 @@
 	});
 	
 	var input = $('#done');
-	$('form').on('submit', function(e) {
-		e.preventDefault();
-		
-		var done = $.trim(input.val());
-		if (done)  {
-			submit(this, done);
-		} else {
-			input.focus();
-		}
-	});
+	$('form')
+		.on('submit', function(e) {
+			e.preventDefault();
+			
+			var done = $.trim(input.val());
+			if (done)  {
+				submit(this, done);
+			} else {
+				input.focus();
+			}
+		})
+		// Clear cached form state from previous sessions
+		.get(0).reset();
 
 	// Auto (re)focus the input if the user starts typing
 	$('body').keydown(function(e) {
