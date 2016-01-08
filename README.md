@@ -17,17 +17,15 @@ The form is responsive and especially suited to be used from a mobile phone.
 
 You must specify the team to which the done should belong to.
 
-You can specify more than one team separated by comma. In that case you'll get a list to pick the team to which each done belongs.
+You can include several teams separated by comma. In that case you'll be able to switch between them, for each done, using the `tab` key.
 
 ### token
 
-To [authenticate you](https://idonethis.com/api/v0.1/#authentication), you must provide your [API token](https://idonethis.com/api/token/).
+To [authenticate](https://idonethis.com/api/v0.1/#authentication) you must provide your [API token](https://idonethis.com/api/token/).
 
 ### day_start (optional)
 
-I don't know about you, but I always continue doing stuff after midnight and, as I see it, they belong to the "previous" day.
-
-In other words, days begin when I wake up. That's why I added implemented this parameter that allows you to specify an hour (1-23). All dones logged before that hour will end up in the previous day.
+I don't know about you, but I always continue doing stuff after midnight and, as I see it, they belong to the "previous" day. In other words, days begin when I wake up. That's why I added this parameter that allows you to specify an hour (1-23). All dones logged before that hour will end up in the previous day.
 
 ### Example
 
@@ -49,11 +47,11 @@ Here's how it looks on my phone:
 
 Once a done is submitted, you will be able to undo what you just did. That will delete the done and restore the done's text on the field for re-submission.
 
-## History navigation
+## Done history
 
-There's also a very basic implementation of history. You can navigate the dones you submitted within the session using `up` and `down` keys.
+There's a very basic implementation of done history. You can navigate the dones you submitted within the session using the `up` and `down` keys.
 
-You can edit items in history and submit, this will create a new done. It won't edit the one you submitted. I might add this feature eventually.
+You can edit items in history and submit them. This will create a new done, it won't update the one you submitted earlier. I might add this feature eventually.
 
 ## Why I made this
 
