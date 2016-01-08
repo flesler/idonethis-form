@@ -2,7 +2,7 @@
 
 ## Description
 
-Very simple mobile-friendly HTML form to submit a done to IDoneThis
+Very simple mobile-friendly HTML form to submit dones to IDoneThis
 
 ## Demo
 
@@ -49,6 +49,12 @@ Here's how it looks on my phone:
 
 Once a done is submitted, you will be able to undo what you just did. That will delete the done and restore the done's text on the field for re-submission.
 
+## History navigation
+
+There's also a very basic implementation of history. You can navigate the dones you submitted within the session using `up` and `down` keys.
+
+You can edit items in history and submit, this will create a new done. It won't edit the one you submitted. I might add this feature eventually.
+
 ## Why I made this
 
 When I'm on my PC, I use [idid](https://github.com/jviotti/idid) to quicky add dones from the command-line.
@@ -58,4 +64,4 @@ Also for me, deferring the start of the day and undoing are sweet useful feature
 
 ## Data privacy
 
-Your team and API key are in no way stored or shared, you can verify that by reading the code.
+Your team, API key or dones are in no way stored or shared, you can verify that by reading the code.

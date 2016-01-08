@@ -1,3 +1,7 @@
+# 1.3.1
+- Implemented history navigation with up/down arrows, could use more polishing
+- Fixed form reset at page start wasn't actually resetting as expected
+
 # 1.3.0
 - Implemented undo after submission
 - Clear cached form state from previous sessions on page load

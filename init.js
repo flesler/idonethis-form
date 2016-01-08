@@ -2,9 +2,9 @@
  * Copyright (c) 2015 Ariel Flesler - aflesler ○ gmail • com
  * Licensed under MIT
  * https://github.com/flesler/idonethis-form/
- * @projectDescription Very simple mobile-friendly HTML form to submit a done to IDoneThis
+ * @projectDescription Very simple mobile-friendly HTML form to submit dones to IDoneThis
  * @author Ariel Flesler
- * @version 1.3.0
+ * @version 1.3.1
  */
 (function() {
 
@@ -58,38 +58,61 @@
 	});
 	
 	var input = $('#done');
-	$('form')
-		.on('submit', function(e) {
-			e.preventDefault();
-			
-			var done = $.trim(input.val());
-			if (done)  {
-				submit(this, done);
-			} else {
-				input.focus();
-			}
-		})
-		// Clear cached form state from previous sessions
-		.get(0).reset();
+	var form = $('form').on('submit', function(e) {
+		e.preventDefault();
+		
+		var done = $.trim(input.val());
+		if (done)  {
+			submit(done);
+		} else {
+			input.focus();
+		}
+	});
+
+	// Clear cached form state from previous sessions
+	setTimeout(function() { form.get(0).reset(); }, 1);
 
 	// Auto (re)focus the input if the user starts typing
 	$('body').keydown(function(e) {
-		// TAB switches between teams
-		var l = teams.length;
-		if (e.keyCode === 9 && l > 1) {
-			e.preventDefault();
-			var dir = e.shiftKey ? -1 : 1;
-			var next = teams.indexOf(getTeam()) + dir;
-			$('#teams input').eq((next+l) % l).click();
+		switch (e.keyCode) {
+			// TAB switches between teams
+			case 9:
+				var l = teams.length;
+				if (l > 1) {
+					e.preventDefault();
+					var dir = e.shiftKey ? -1 : 1;
+					var next = teams.indexOf(getTeam()) + dir;
+					$('#teams input').eq((next+l) % l).click();
+				}
+				break;
+			// UP goes back through the done history
+			case 38: moveHistory(-1); break;
+			// DOWN returns to newer dones
+			case 40: moveHistory(+1); break;
 		}
 		input.focus();
 	});
 
+	var dones = [], curIndex = 0;
+
+	function moveHistory(by) {
+		// FIXME: There are some rough edges to this
+		var done = input.val();
+		dones[curIndex] = done;
+
+		var next = dones[curIndex+by] || '';
+		if (!done && !next) return;
+		curIndex += by;
+		input.val(next);
+	}
+
+	// TODO: Could integrated lastDone with dones queue and multi-undoing
 	var lastDone;
 	$('#undo').click(function(e) {
 		e.preventDefault();
 		$('#done-ok').fadeOut('slow');
 		input.val(lastDone.raw_text);
+		dones.pop();
 		ajax('delete', lastDone.url, null, function(json) {
 			$('#undo-warn').fadeIn('slow');
 		});
@@ -97,17 +120,24 @@
 
 	//- Utils
 
-	function submit(form, done) {
+	function submit(done) {
 		var data = { raw_text: done, team: getTeam() };
 		// Send a done_date instead of relying on IDoneThis' default
 		if (dayStart) data.done_date = getToday();
 
-		ajax(form.method, form.action, data, function(json) {
+		ajax(form.attr('method'), form.attr('action'), data, function(json) {
 			var data = JSON.parse(json);
 			if (data.ok) {
 				lastDone = data.result;
 				$('#done-ok').fadeIn('slow').find('a').attr('href', data.result.permalink);
-				input.val('');
+				// TODO: Allow editing any prev done in the session? needs to store team
+				// When submiting a history done, remove the last unused done
+				if (curIndex !== dones.length) {
+					dones.pop();
+				}
+				// Bring back pointer to end, cannot edit in the middle
+				curIndex = dones.length;
+				moveHistory(1);
 			} else {
 				showError(data.detail);
 			}
