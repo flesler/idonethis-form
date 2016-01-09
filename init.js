@@ -70,7 +70,7 @@
 	});
 
 	// Clear cached form state from previous sessions
-	setTimeout(function() { form.get(0).reset(); }, 1);
+	$(window).load(function(){ form.get(0).reset(); });
 
 	// Auto (re)focus the input if the user starts typing
 	$('body').keydown(function(e) {

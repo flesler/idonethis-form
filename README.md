@@ -45,13 +45,13 @@ Here's how it looks on my phone:
 
 ## Undoing
 
-Once a done is submitted, you will be able to undo what you just did. That will delete the done and restore the done's text on the field for re-submission.
+After a done is submitted, you will be able to undo it. This will delete the done and restore its text on the input field for re-submission (if desired).
 
 ## Done history
 
-There's a very basic implementation of done history. You can navigate the dones you submitted within the session using the `up` and `down` keys.
+You can navigate the dones you submitted within the session, using the `up` and `down` keys.
 
-You can edit items in history and submit them. This will create a new done, it won't update the one you submitted earlier. I might add this feature eventually.
+You can edit history items and submit them. This will create a new done, it won't update the one you submitted earlier. I might add this feature eventually.
 
 ## Why I made this
 
