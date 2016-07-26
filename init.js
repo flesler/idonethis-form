@@ -23,6 +23,8 @@
 	if (!qs.token) $('#token-err').show();
 	if (!qs.teams) $('#team-err').show();
 
+	updateTime();
+
 	// Some fields are missing, cannot allow edition
 	if (!qs.token || !qs.teams) {
 		return disabled(true);
@@ -118,6 +120,7 @@
 		});
 	});
 
+
 	//- Utils
 
 	function submit(done) {
@@ -192,6 +195,12 @@
 		var link = e.currentTarget;
 		// Before the click, add today's date taking day_start into account
 		link.href = link.href.replace(/#.*|$/, '#date/'+getToday());
+	}
+
+	function updateTime() {
+		var time = new Date().toTimeString().slice(0, 5);
+		$('#time').show().children().last().text(time);
+		setTimeout(updateTime, 5e3);
 	}
 
 })();
